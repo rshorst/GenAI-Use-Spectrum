@@ -25,7 +25,11 @@ function updateUI(index) {
   const zone = zones[index];
   dot.style.left = `${(index + 0.5) * (100 / 12)}%`;
   dot.style.backgroundColor = zone.color;
+
+  // Set dynamic label
   label.innerHTML = `AI Collaboration Level: <span style="color: ${zone.color}; font-weight: bold;">${zone.label}</span>`;
+
+  // Set reflective questions and scenario
   questionBox.innerHTML = `<p>${zone.questions[0]}</p><p>${zone.questions[1]}</p>`;
   output.textContent = zone.scenario;
 }
@@ -47,14 +51,14 @@ function handleToggles() {
     questionBox.innerHTML = `<p>⚠️ Please select only one toggle.</p>`;
     output.textContent = "";
     dot.style.display = "none";
-    label.textContent = "";
+    label.innerHTML = "";
     return;
   }
 
   if (noAiToggle.checked) {
     questionBox.innerHTML = `<p>Why did you choose not to use AI for this task?</p><p>What value did you gain from doing the work independently?</p>`;
     output.textContent = "You opted for full human authorship to deepen your own thinking and practice.";
-    label.textContent = "No AI Used";
+    label.innerHTML = `AI Collaboration Level: <span style="color: #333; font-weight: bold;">No AI Used</span>`;
     dot.style.display = "none";
     return;
   }
@@ -62,12 +66,12 @@ function handleToggles() {
   if (fullAiToggle.checked) {
     questionBox.innerHTML = `<p>Why was full automation appropriate in this context?</p><p>How did you ensure ethical, accurate, and transparent use?</p>`;
     output.textContent = "You intentionally used AI to fully automate the task, ensuring ethical and appropriate use.";
-    label.textContent = "Fully AI Generated";
+    label.innerHTML = `AI Collaboration Level: <span style="color: #333; font-weight: bold;">Fully AI Generated</span>`;
     dot.style.display = "none";
     return;
   }
 
-  // Default
+  // Default view
   dot.style.display = "block";
   updateUI(0);
 }
