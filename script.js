@@ -25,7 +25,7 @@ function updateUI(index) {
   const zone = zones[index];
   dot.style.left = `${(index + 0.5) * (100 / 12)}%`;
   dot.style.backgroundColor = zone.color;
-  label.textContent = zone.label;
+  label.innerHTML = `AI Collaboration Level: <span style="color: ${zone.color}; font-weight: bold;">${zone.label}</span>`;
   questionBox.innerHTML = `<p>${zone.questions[0]}</p><p>${zone.questions[1]}</p>`;
   output.textContent = zone.scenario;
 }
