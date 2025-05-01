@@ -21,15 +21,14 @@ const zones = [
   { label: "Problematic Outsourcing", color: "#F44336", questions: ["Was this a case of full delegation to AI without authorship?", "How might this undermine trust or authenticity?"], scenario: "You copy-pasted full AI-generated response with no edits." }
 ];
 
+let currentZoneIndex = 0;
+
 function updateUI(index) {
   const zone = zones[index];
+  currentZoneIndex = index;
   dot.style.left = `${(index + 0.5) * (100 / 12)}%`;
   dot.style.backgroundColor = zone.color;
-
-  // Set dynamic label
   label.innerHTML = `AI Collaboration Level: <span style="color: ${zone.color}; font-weight: bold;">${zone.label}</span>`;
-
-  // Set reflective questions and scenario
   questionBox.innerHTML = `<p>${zone.questions[0]}</p><p>${zone.questions[1]}</p>`;
   output.textContent = zone.scenario;
 }
@@ -71,13 +70,13 @@ function handleToggles() {
     return;
   }
 
-  // Default view
+  // ✅ Reset to last selected zone if toggles are off
   dot.style.display = "block";
-  updateUI(0);
+  updateUI(currentZoneIndex);
 }
 
 noAiToggle.addEventListener("change", handleToggles);
 fullAiToggle.addEventListener("change", handleToggles);
 
-// Initialize
+// Initialize default zone
 updateUI(0);
